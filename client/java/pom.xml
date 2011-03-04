@@ -1,14 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.spread-osd</groupId>
-	<artifactId>spread-osd</artifactId>
+	<groupId>net.sourceforge.ls4</groupId>
+	<artifactId>ls4</artifactId>
 	<version>0.1.0</version>
-	<name>SpreadOSD Client</name>
-	<description>SpreadOSD client library</description>
-	<!--
-	<url>http://spread-osd.org/</url>
-	-->
+	<name>LS4 Client</name>
+	<description>LS4 client library for Java</description>
+	<url>http://ls4.sourceforge.net/</url>
 
 	<licenses>
 		<license>

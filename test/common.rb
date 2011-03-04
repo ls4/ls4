@@ -5,7 +5,7 @@ TTSERVER = ENV["TTSERVER"] || "ttserver"
 
 DATA_DIR = ENV["DATA_DIR"] || "#{here}/tmp-#{Time.now.strftime("%Y-%m-%d.%H-%M-%S")}.#{Process.pid}"
 
-CMD_BASE = "#{RUBY} -I#{here}/../lib #{here}/../lib/spread-osd/command"
+CMD_BASE = "#{RUBY} -I#{here}/../lib #{here}/../lib/ls4/command"
 CMD_CS  = "#{CMD_BASE}/cs.rb"
 CMD_DS  = "#{CMD_BASE}/ds.rb"
 CMD_GW  = "#{CMD_BASE}/gw.rb"

@@ -1,6 +1,6 @@
-AC_INIT(lib/spread-osd/logic/membership.rb)
+AC_INIT(lib/ls4/logic/membership.rb)
 AC_CONFIG_AUX_DIR(ac)
-AM_INIT_AUTOMAKE(spread-osd, 0.2.0)
+AM_INIT_AUTOMAKE(ls4, 0.9.0)
 
 AC_CHECK_PROG(RUBY, ruby, ruby)
 if test "x$RUBY" = x; then

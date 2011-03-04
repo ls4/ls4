@@ -5,11 +5,11 @@ require 'rake/clean'
 begin
 	require 'jeweler'
 	Jeweler::Tasks.new do |gemspec|
-		gemspec.name = "spread-osd"
-		gemspec.summary = "SpreadOSD - a distributed storage system"
+		gemspec.name = "ls4"
+		gemspec.summary = "LS4 - large-scale simple storage system"
 		gemspec.author = "FURUHASHI Sadayuki"
 		gemspec.email = "frsyuki@users.sourceforge.jp"
-		gemspec.homepage = "http://github.com/frsyuki/spread-osd"
+		gemspec.homepage = "http://ls4.sourceforge.net/"
 		gemspec.has_rdoc = false
 		gemspec.require_paths = ["lib"]
 		gemspec.add_dependency "msgpack", ">= 0.4.4"
@@ -29,13 +29,13 @@ rescue LoadError
 	puts "Jeweler not available. Install it with: gem install jeweler"
 end
 
-VERSION_FILE = "lib/spread-osd/version.rb"
+VERSION_FILE = "lib/ls4/version.rb"
 
 file VERSION_FILE => ["VERSION"] do |t|
 	version = File.read("VERSION").strip
 	File.open(VERSION_FILE, "w") {|f|
 		f.write <<EOF
-module SpreadOSD
+module LS4
 
 VERSION = '#{version}'
 
