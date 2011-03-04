@@ -11,7 +11,7 @@ nobase_pkgdata_SCRIPTS = \
 	bin/ls4rpc \
 	bin/ls4top \
 	lib/ls4/default.rb \
-	lib/ls4/command/cli.rb \
+	lib/ls4/command/cmd.rb \
 	lib/ls4/command/cs.rb \
 	lib/ls4/command/ctl.rb \
 	lib/ls4/command/ds.rb \
