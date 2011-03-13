@@ -2,13 +2,14 @@
 BUILD_TMP = build-tmp
 
 nobase_pkgdata_SCRIPTS = \
-	bin/ls4-cs \
+	btopin/ls4-cs \
 	bin/ls4-ds \
 	bin/ls4-gw \
 	bin/ls4-standalone \
 	bin/ls4cmd \
 	bin/ls4ctl \
 	bin/ls4rpc \
+	bin/ls4stat \
 	bin/ls4top \
 	lib/ls4/default.rb \
 	lib/ls4/command/cmd.rb \
@@ -18,6 +19,7 @@ nobase_pkgdata_SCRIPTS = \
 	lib/ls4/command/gw.rb \
 	lib/ls4/command/standalone.rb \
 	lib/ls4/command/rpc.rb \
+	lib/ls4/command/stat.rb \
 	lib/ls4/command/top.rb \
 	lib/ls4/lib/cclog.rb \
 	lib/ls4/lib/ebus.rb \
@@ -101,6 +103,7 @@ bin_SCRIPTS = \
 	$(BUILD_TMP)/ls4cmd \
 	$(BUILD_TMP)/ls4ctl \
 	$(BUILD_TMP)/ls4rpc \
+	$(BUILD_TMP)/ls4stat \
 	$(BUILD_TMP)/ls4top
 
 EXTRA_DIST = \
