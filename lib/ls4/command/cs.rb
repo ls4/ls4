@@ -92,15 +92,15 @@ op.on('-l', '--listen HOST', "listen address") do |addr|
 	end
 end
 
-op.on('-m', '--mds EXPR', "address of metadata server") do |s|
+op.on('-m', '--mds EXPR', "address of metadata servers (required)") do |s|
 	conf.mds_uri = s
 end
 
-op.on('-M', '--mds-cache EXPR', "mds cache") do |s|
+op.on('-M', '--mds-cache EXPR', "address of metadata cache servers") do |s|
 	conf.mds_cache_uri = s
 end
 
-op.on('-s', '--store PATH', "path to base directory") do |path|
+op.on('-s', '--store PATH', "path to default directory to store various data (required for production use)") do |path|
 	store_path = path
 end
 

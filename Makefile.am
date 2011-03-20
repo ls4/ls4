@@ -2,7 +2,7 @@
 BUILD_TMP = build-tmp
 
 nobase_pkgdata_SCRIPTS = \
-	btopin/ls4-cs \
+	bin/ls4-cs \
 	bin/ls4-ds \
 	bin/ls4-gw \
 	bin/ls4-standalone \

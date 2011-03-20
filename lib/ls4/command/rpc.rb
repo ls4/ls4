@@ -135,7 +135,7 @@ module LS4RPC
 end
 
 def usage_exit
-	puts "usage: #{File.basename($0)} <host>:<port> [method [args ...]]"
+	puts "Usage: #{File.basename($0)} <host>:<port> [method [args ...]]"
 	exit 1
 end
 
@@ -161,7 +161,7 @@ if ARGV.empty?
 else
 	require 'pp'
 	require 'yaml'
-	require 'json'
+	#require 'json'  # TODO
 	method = ARGV.shift
 	args = ARGV.map {|arg|
 		YAML.load(arg)

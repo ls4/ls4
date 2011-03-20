@@ -21,18 +21,18 @@ require 'pp'
 def usage
 	puts "Usage: #{File.basename($0)} <cs address[:port]> <command> [options]"
 	puts "command:"
-	puts "   stat                         show statistics of nodes"
 	puts "   nodes                        show list of nodes"
-	puts "   remove_node <nid>            remove a node from the cluster"
-	puts "   weight                       show list of replication sets"
-	puts "   set_weight <rsid> <weight>   set distribution weight"
-	puts "   mds                          show MDS uri"
-	puts "   set_mds <URI>                set MDS uri"
-	puts "   mds_cache                    show MDS cache uri"
-	puts "   set_mds_cache <URI>          set MDS cache uri"
-	puts "   items                        show stored number of items"
-	puts "   version                      show software version of nodes"
+	puts "   stat                         show statistics of nodes"
+	puts "   remove_node <nid>            remove a node from a replica-set"
 	puts "   locate <key>                 show which servers store the key"
+	puts "   weight                       show list of replica-sets"
+	puts "   set_weight <rsid> <weight>   change a weight of a replica-set"
+	puts "   mds                          show MDS uri"
+	puts "   set_mds <expr>               set MDS uri"
+	puts "   mds_cache                    show MDS cache uri"
+	puts "   set_mds_cache <expr>         set MDS cache uri"
+	puts "   items                        show stored number of objects"
+	puts "   version                      show software version of nodes"
 	exit 1
 end
 

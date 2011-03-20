@@ -122,15 +122,15 @@ op.on('-l', '--listen HOST', "listen address") do |addr|
 	end
 end
 
-op.on('-m', '--mds EXPR', "address of metadata server") do |s|
+op.on('-m', '--mds EXPR', "address of metadata servers") do |s|
 	mds_uri = s
 end
 
-op.on('-M', '--mds-cache EXPR', "mds cache") do |s|
+op.on('-M', '--mds-cache EXPR', "address of metadata cache servers") do |s|
 	mds_cache_uri = s
 end
 
-op.on('-s', '--store PATH', "path to storage directory") do |path|
+op.on('-s', '--store PATH', "path to storage directory (required)") do |path|
 	conf.storage_path = path
 end
 

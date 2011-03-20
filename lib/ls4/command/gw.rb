@@ -83,7 +83,7 @@ listen_port = GW_DEFAULT_PORT
 
 read_only_gw = false
 
-op.on('-c', '--cs ADDRESS', "address of config server") do |addr|
+op.on('-c', '--cs ADDRESS', "address of config server (required)") do |addr|
 	host, port = addr.split(':',2)
 	port = port.to_i
 	port = CS_DEFAULT_PORT if port == 0
@@ -131,14 +131,14 @@ op.on('-R', '--read-only', "read-only mode", TrueClass) do |b|
 	read_only_gw = b
 end
 
-op.on('-N', '--read-only-name NAME', "read-only mode using the version name") do |name|
-	read_only_gw = true
-	conf.read_only_version = name
-end
-
 op.on('-T', '--read-only-time TIME', "read-only mode using the time", Integer) do |time|
 	read_only_gw = true
 	conf.read_only_version = time
+end
+
+op.on('-N', '--read-only-name NAME', "read-only mode using the version name") do |name|
+	read_only_gw = true
+	conf.read_only_version = name
 end
 
 op.on('-L', '--location STRING', "enable location-aware master selection") do |str|
@@ -216,10 +216,10 @@ SyncClientService.init
 HeartbeatClientService.init
 RoutRobinWeightBalanceService.init
 WeightMemberService.init
-if conf.self_location
-	LocationAwareMasterSelectService.init
-else
+if conf.self_location.empty?
 	FlatMasterSelectService.init
+else
+	LocationAwareMasterSelectService.init
 end
 MembershipClientService.init
 DataClientService.init

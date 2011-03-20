@@ -1,0 +1,61 @@
+= LS4, a Large-Scale Simple Storage System
+
+LS4 is a distributed storage system that can store large data like photos, music or movies.
+
+[Scalability] Grows storage capacity and I/O throughput dynamically without any modification of applications.
+[Availability] Prevents whole system falt from partial hardware crashes by failing-over within very small downtime.
+[Versioning] Takes back old data by creation time or version name of the stored objects.
+[Continuous snapshot] Supported based on time-based versioning.
+[Geo-redundancy] Supports replication of objects across multiple datacenters.
+[Direct data transfer] Reduces local network traffic and load of front-end servers by cooperating with proxy servers.
+[Traffic offloading] Enhances performance of data servers by offloading traffics to native web servers.
+
+
+== Data model
+
+LS4 stores a set of objects identified by a key. Each object consists with data and attributes, and can have multiple versions.
+
+    key                        object
+                      data                  attributes
+               +-----------------+---------------------------------+       ---+
+  "image1" =>  |  "HTJ PNG ..."  |  { type:png, model:NEX-5 }      |--+       | each object can
+               +-----------------+---------------------------------+  |--+    | have multiple
+                 +-----------------+----------------------------------+  |    | versoins
+                    +----------------+-----------------------------------+    |
+                                                                           ---+
+               +-----------------+---------------------------------+
+    key    =>  |  bytes .......  |  { key:value, key:value, ... }  |--+
+               +-----------------+---------------------------------+  |--+
+                 +-----------------+----------------------------------+  |
+                    +----------------+-----------------------------------+
+  
+    ...    =>  ...
+
+For more details, see {LS4 Documents}[http://ls4.sourceforge.net/doc/].
+
+
+== Quick Start
+
+    $ gem install ls4
+    $ ls4-standalone -s ./data -h 18080 &
+    
+    $ curl -X POST -d 'data=value1&attrs={"test":"attr"}' http://localhost:18080/data/key1
+    
+    $ curl -X GET http://localhost:18080/data/key1
+    value1
+    
+    $ curl -X GET http://localhost:18080/attrs/key1
+    {"test":"attr"}
+
+
+
+Project web site::  http://ls4.sourceforge.net/
+Documents:: http://ls4.sourceforge.net/doc/
+Documents (Japanese):: http://ls4.sourceforge.net/doc/ja/
+Source repository:: http://github.com/ls4
+Author:: FURUHASHI Sadayuki
+Copyright:: (c) 2010-2011 FURUHASHI Sadayuki
+License:: AGPL
+
+See also NOTICE[https://github.com/ls4/ls4/blob/master/NOTICE] file.
+

@@ -136,7 +136,7 @@ class WeightBalancer < WeightInfo
 
 	def select_next_rsid
 		if @array.empty?
-			raise "no replication set is registered"
+			raise "no replica set is registered"
 		end
 		@rr += 1
 		@rr = 0 if @rr >= @array.size

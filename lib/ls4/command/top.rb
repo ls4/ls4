@@ -26,7 +26,7 @@ require "curses"
 require 'pp'
 
 op = OptionParser.new
-op.banner += " <cs address>"
+op.banner += " <cs address[:port]>"
 
 (class<<self;self;end).module_eval do
 	define_method(:usage) do |msg|

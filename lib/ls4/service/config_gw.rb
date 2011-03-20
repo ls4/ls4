@@ -19,6 +19,10 @@ module LS4
 
 
 class GWConfigService < ConfigService
+	def initialize
+		@self_location = ""
+	end
+
 	attr_accessor :self_location
 	attr_accessor :cs_address
 

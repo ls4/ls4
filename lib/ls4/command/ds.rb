@@ -95,22 +95,22 @@ listen_port = nil
 
 read_only_gw = false
 
-op.on('-c', '--cs ADDRESS', "address of config server") do |addr|
+op.on('-c', '--cs ADDRESS', "address of config server (required)") do |addr|
 	host, port = addr.split(':',2)
 	port = port.to_i
 	port = CS_DEFAULT_PORT if port == 0
 	conf.cs_address = Address.new(host, port)
 end
 
-op.on('-i', '--nid ID', Integer, "unieque node id") do |nid|
+op.on('-i', '--nid ID', Integer, "unieque node id (required)") do |nid|
 	conf.self_nid = nid
 end
 
-op.on('-n', '--name NAME', "node name") do |name|
+op.on('-n', '--name NAME', "human-readable node name (required)") do |name|
 	conf.self_name = name
 end
 
-op.on('-a', '--address ADDRESS[:PORT]', "address of this node") do |addr|
+op.on('-a', '--address ADDRESS[:PORT]', "address of this node (required)") do |addr|
 	host, port = addr.split(':',2)
 	port = port.to_i
 	if port != 0
@@ -134,7 +134,7 @@ op.on('-l', '--listen HOST[:PORT]', "listen address") do |addr|
 	end
 end
 
-op.on('-g', '--rsid IDs', "replication set IDs") do |ids|
+op.on('-g', '--rsid IDs', "replica-set IDs to join (required)") do |ids|
 	conf.self_rsids = ids.split(',').map {|id| id.to_i }
 end
 
@@ -142,7 +142,7 @@ op.on('-L', '--location STRING', "location of this node") do |str|
 	conf.self_location = str
 end
 
-op.on('-s', '--store PATH', "path to storage directory") do |path|
+op.on('-s', '--store PATH', "path to storage directory (required)") do |path|
 	conf.storage_path = path
 end
 
@@ -237,16 +237,6 @@ begin
 
 	unless conf.self_rsids
 		raise "--rsid option is required"
-	end
-
-	unless conf.self_location
-		a = conf.self_address.host
-		if a.include?('.')
-			s = a.split('.')[0,3].map{|v4| "%03d" % v4.to_i }.join('.')
-		else
-			s = a.split(':')[0,4].map{|v6| "%04x" % v6.to_i(16) }.join(':')
-		end
-		conf.self_location = "subnet-#{s}"
 	end
 
 	unless conf.cs_address

@@ -54,7 +54,7 @@ conf = {
 }
 
 op.banner = <<EOF
-Usage: #{File.basename($0)} host[:port] [options] params...
+Usage: #{File.basename($0)} <cs address[:port]> [options] params...
 params:
     nid     address    name      rsid    location
     state   time       uptime    pid     version
