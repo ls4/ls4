@@ -18,11 +18,10 @@ begin
 		gemspec.add_dependency "tokyotyrant", ">= 1.13"
 		gemspec.add_dependency "memcache-client", ">= 1.8.5"
 		gemspec.add_dependency "rack", ">= 1.2.1"
-		gemspec.test_files = Dir["test/test_*.rt"]
-		gemspec.files = Dir["lib/**/*", "ext/**/*", "spec/**/*", "tasks/**/*"] +
-			Dir["test/**/*"] - Dir["test/tmp-*/**/*"] +
-			%w[AUTHORS ChangeLog COPYING NOTICE README.md README.ja.md]
-		gemspec.extra_rdoc_files = []
+		gemspec.test_files = Dir["test/**/*.rt"]
+		gemspec.files = Dir["lib/**/*", "ext/**/*", "test/**/*.rb", "test/**/*.rt"] +
+			%w[AUTHORS ChangeLog COPYING NOTICE README.rdoc]
+		gemspec.extra_rdoc_files = %w[README.rdoc ChangeLog]
 		gemspec.add_development_dependency('rspec')
 	end
 	Jeweler::GemcutterTasks.new

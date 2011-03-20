@@ -2,7 +2,7 @@
 BUILD_TMP = build-tmp
 
 nobase_pkgdata_SCRIPTS = \
-	btopin/ls4-cs \
+	bin/ls4-cs \
 	bin/ls4-ds \
 	bin/ls4-gw \
 	bin/ls4-standalone \
@@ -106,12 +106,15 @@ bin_SCRIPTS = \
 	$(BUILD_TMP)/ls4stat \
 	$(BUILD_TMP)/ls4top
 
+.PHONY: $(bin_SCRIPTS)
+
+MOSTLYCLEANFILES = $(bin_SCRIPTS)
+
 EXTRA_DIST = \
 	$(nobase_pkgdata_SCRIPTS) \
 	Rakefile \
 	VERSION \
-	README.md \
-	README.ja.md
+	README.rdoc
 
 $(bin_SCRIPTS):
 	mkdir -p `dirname $@`
@@ -124,46 +127,4 @@ $(bin_SCRIPTS):
 	echo "load '$(pkgdatadir)/bin/`basename $@`'" >> "$@.tmp"
 	chmod 755 "$@.tmp"
 	mv "$@.tmp" "$@"
-
-.PHONY: $(bin_SCRIPTS)
-
-HTML_DOCS = \
-	doc/index.html \
-	doc/index.ja.html \
-	doc/api.html \
-	doc/api.ja.html \
-	doc/arch.html \
-	doc/arch.ja.html \
-	doc/build.html \
-	doc/build.ja.html \
-	doc/command.html \
-	doc/command.ja.html \
-	doc/devel.html \
-	doc/devel.ja.html \
-	doc/faq.html \
-	doc/faq.ja.html \
-	doc/fault.html \
-	doc/fault.ja.html \
-	doc/howto.html \
-	doc/howto.ja.html \
-	doc/howto/nginx.html \
-	doc/howto/nginx.ja.html \
-	doc/install.html \
-	doc/install.ja.html \
-	doc/operation.html \
-	doc/operation.ja.html \
-	doc/plugin.html \
-	doc/plugin.ja.html
-
-MOSTLYCLEANFILES = \
-	$(bin_SCRIPTS) \
-	$(HTML_DOCS)
-
-.md.html:
-	ruby doc/erbdoc.rb $< $@.tmp
-	mv $@.tmp $@
-
-$(HTML_DOCS): doc/erbdoc.rb doc/doc.erb
-
-htmldoc: $(HTML_DOCS)
 
