@@ -54,7 +54,7 @@ conf = {
 }
 
 op.banner = <<EOF
-Usage: #{File.basename($0)} <cs address[:port]> [options] params...
+Usage: #{File.basename($0)} host[:port] [options] params...
 params:
     nid     address    name      rsid    location
     state   time       uptime    pid     version
@@ -94,6 +94,10 @@ op.on('-m', '--msgpack', 'use MessagePack format', TrueClass) {|b|
 
 op.on('-y', '--yaml', 'use YAML format', TrueClass) {|b|
 	conf[:format] = 'yaml'
+}
+
+op.on('-a', '--array', 'show as array instead of map', TrueClass) {|b|
+	conf[:array] = true
 }
 
 begin
