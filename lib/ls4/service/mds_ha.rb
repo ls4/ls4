@@ -33,6 +33,7 @@ module LS4
 #
 class BasicHADB
 	DEFAULT_WEIGHT = 10
+	MAX_RETRY = 4
 
 	def initialize(expr)
 		@dbmap = {}    # {Address => DB}
@@ -146,29 +147,41 @@ class BasicHADB
 
 	def ha_call(array, idx, &block)
 		db = nil
-		failed = []
+		failed = {}
 		sz = array.size
 		sz.times {
 			addr = array[idx % sz]
-			unless failed.include?(addr)
-				db = @dbmap[addr]
-				if ensure_db(db, addr)
-					@dbmap[addr] = db  # FIXME
-					begin
-						result = block.call(db)
-						if err = error_result?(db, result)
-							failed << [addr, err]
-						else
-							return result
-						end
-					rescue
-						failed << [addr, $!]
-					end
+			errors = failed[addr]
+			if !errors || errors.size < MAX_RETRY
+				result, error = ha_try_call(addr, block)
+				if error
+					(failed[result] ||= []) << error if result
+				else
+					return result
 				end
 			end
-			idx += 1
 		}
-		raise "MDS error: #{failed.inspect}"  # TODO error message
+		raise "MDS error:\n" + failed.map {|addr,errors|
+			"#{addr}: #{errors.join(', ')}"
+		}.join("\n")
+	end
+
+	def ha_try_call(addr, block)
+		db = @dbmap[addr]
+		if ensure_db(db, addr)
+			@dbmap[addr] = db  # FIXME
+			begin
+				result = block.call(db)
+				if err = error_result?(db, result)
+					return addr, err
+				else
+					return result, nil
+				end
+			rescue
+				return addr, $!
+			end
+		end
+		return nil, nil
 	end
 end
 
