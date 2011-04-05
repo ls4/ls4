@@ -646,23 +646,22 @@ EOF
 
 
 	private
-	def require_str(request, k)
+	def optional_str(request, k)
 		str = request.GET[k] || request.POST[k]
+		if str.is_a?(Hash)
+			str[:tempfile].read
+		else
+			str
+		end
+	end
+
+	def require_str(request, k)
+		str = optional_str(request, k)
 		unless str
 			# FIXME HTTP error code
 			raise "#{k} is required"
 		end
 		str
-	end
-
-	def require_int(request, k)
-		str = require_str(request, k)
-		# FIXME check error
-		str.to_i
-	end
-
-	def optional_str(request, k)
-		request.GET[k] || request.POST[k]
 	end
 
 	def optional_int(request, k)
@@ -673,6 +672,12 @@ EOF
 		else
 			nil
 		end
+	end
+
+	def require_int(request, k)
+		str = require_str(request, k)
+		# FIXME check error
+		str.to_i
 	end
 
 	def get_cmd_path_info(env)
